@@ -6,27 +6,28 @@ namespace SteamFees
     {
         static void Main()
         {
-            for (int input = 1; input < 105; input++)
+            for (uint input = 1; input < 50; input++)
             {
-                int receivedAmount = GetPriceToSend(input);
-                int correctedInput = GetThirdPartyPrice(receivedAmount);
-                string str = $"You receive {receivedAmount / 100f} / Buyer pays {correctedInput / 100f}";
+                uint receivedAmount = GetPriceToSend(input);
+                uint correctedInput = GetThirdPartyPrice(receivedAmount);
+                string str = $"You receive {receivedAmount / 100f} / Buyer pays {correctedInput / 100f}   #{input}";
                 Console.WriteLine(str);
             }
             Console.WriteLine("Hello World!");
         }
-        public static int GetThirdPartyPrice(int priceToSend)
+        public static uint GetThirdPartyPrice(uint priceToSend)
         {
-            int steamFee = (int)Math.Floor(Math.Max(priceToSend * 0.05f, 1));
-            int publisherFee = (int)Math.Floor(Math.Max(priceToSend * 0.1f, 1));
-            int thirdPartyPrice = priceToSend + steamFee + publisherFee;
+            uint steamFee = (uint)Math.Floor(Math.Max(priceToSend * 0.05f, 1));
+            uint publisherFee = (uint)Math.Floor(Math.Max(priceToSend * 0.1f, 1));
+            uint thirdPartyPrice = priceToSend + steamFee + publisherFee;
             return thirdPartyPrice;
         }
-        public static int GetPriceToSend(int thirdPartyPrice)
+        public static uint GetPriceToSend(uint thirdPartyPrice)
         {
-            int steamFee = Math.Max((int)Math.Floor(thirdPartyPrice - thirdPartyPrice / 1.05f), 1);
-            int publisherFee = Math.Max((int)Math.Floor(thirdPartyPrice - thirdPartyPrice / 1.1f), 1);
-            int priceToSend = Math.Max(thirdPartyPrice - steamFee - publisherFee, 1);
+            float totalFee = Math.Max((uint)Math.Floor(thirdPartyPrice - thirdPartyPrice / 1.15f), 1);
+            uint steamFee = Math.Max((uint)Math.Floor(totalFee / 3f), 1);
+            uint publisherFee = Math.Max((uint)Math.Floor(Math.Floor(totalFee / 3f) * 2f), 1);
+            uint priceToSend = (uint)Math.Max((int)(thirdPartyPrice - steamFee - publisherFee), 1);          
             return priceToSend;
         }
     }
