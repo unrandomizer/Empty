@@ -9,4 +9,8 @@
     <PackageReference Include="SteamKit2" Version="2.2.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Data\" />
+  </ItemGroup>
+
 </Project>
