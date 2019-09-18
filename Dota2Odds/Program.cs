@@ -10,7 +10,7 @@ namespace Dota2Odds
             for (int i = 0; i < 5000; i++)
             {
                 treasure.Open();
-                Console.WriteLine($"#{i} {treasure.totalSpent / 100} {treasure.totalWin / 100} {treasure.totalWin / (float)treasure.totalSpent}");
+                Console.WriteLine($"#{treasure.countTotal} {treasure.totalSpent / 100} {treasure.totalWin / 100} {treasure.totalWin / (float)treasure.totalSpent}");
             }
             Console.ReadKey();
         }
@@ -24,7 +24,7 @@ namespace Dota2Odds
         ulong rarePrice = 20400;
         ulong veryRarePrice = 20525;
         ulong ultraRarePrice = 560000;
-        int countTotal = 0;
+        public int countTotal = 0;
         int countRare = 0;
         int countVeryRare = 0;
         int countUltraRare = 0;
